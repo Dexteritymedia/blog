@@ -5,7 +5,6 @@ DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
-#SECRET_KEY = "django-insecure-%4($+**0u0h5cp0qa3c=o^!52+t_ppi^_+7xbf@vet$7t66#^)"
 
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ["*"]
