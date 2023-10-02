@@ -1,0 +1,93 @@
+{% load wagtailimages_tags %}
+
+<!--about start -->
+		<section id="about" class="about">
+			<div class="section-heading text-center">
+				<h2>{{ self.title }}</h2>
+			</div>
+			<div class="container">
+				<div class="about-content">
+					<div class="row">
+					{% for detail in self.details %}
+						<div class="col-sm-6">
+							<div class="single-about-txt">
+							{{ detail.text }}
+								<div class="row">
+									{% if detail.phone_no %}
+									<div class="col-sm-4">
+										<div class="single-about-add-info">
+											<h3>phone</h3>
+											<p>{{ detail.phone_no }}</p>
+										</div>
+									</div>
+									{% endif %}
+									{% if detail.email %}
+									<div class="col-sm-4">
+										<div class="single-about-add-info">
+											<h3>email</h3>
+											<p>{{ detail.email }}</p>
+										</div>
+									</div>
+									{% endif %}
+									{% if detail.website %}
+									<div class="col-sm-4">
+										<div class="single-about-add-info">
+											<h3>website</h3>
+											<p>{{ detail.website }}</p>
+										</div>
+									</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-offset-1 col-sm-5">
+							<div class="single-about-img">
+							{% image detail.image original as photo %}
+								<img src="{{ photo.url }}" alt="{{ photo.alt }}">
+								<div class="about-list-icon">
+									<ul>
+									{% if detail.facebook %}
+										<li>
+											<a href="#">
+												<i  class="fa fa-facebook" aria-hidden="true"></i>
+											</a>
+										</li><!-- / li -->
+									{% endif %}
+									{% if detail.dribbble %}
+										<li>
+											<a href="#">
+												<i  class="fa fa-dribbble" aria-hidden="true"></i>
+											</a>
+											
+										</li><!-- / li -->
+										{% endif %}
+										<li>
+											<a href="#">
+												<i  class="fa fa-twitter" aria-hidden="true"></i>
+											</a>
+											
+										</li><!-- / li -->
+										<li>
+											<a href="#">
+												<i  class="fa fa-linkedin" aria-hidden="true"></i>
+											</a>
+										</li><!-- / li -->
+										<li>
+											<a href="#">
+												<i  class="fa fa-instagram" aria-hidden="true"></i>
+											</a>
+										</li><!-- / li -->
+										
+										
+									</ul><!-- / ul -->
+								</div><!-- /.about-list-icon -->
+
+							</div>
+
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</section><!--/.about-->
+		<!--about end -->

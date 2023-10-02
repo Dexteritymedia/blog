@@ -1,0 +1,11 @@
+{% load menu_tags %}
+
+{% if menu_items %}
+						{% for item in menu_items %}
+			                    <li class=" smooth-menu"><a href="#{{ item.href }}">{{ item.text|title }}</a></li>
+						{% endfor %}
+			       
+				   
+				   
+
+{% endif %}

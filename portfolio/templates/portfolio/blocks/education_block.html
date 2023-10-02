@@ -1,0 +1,37 @@
+		<!--education start -->
+		<section id="{{ self.title }}" class="education">
+			<div class="section-heading text-center">
+				<h2>{{ self.title }}</h2>
+			</div>
+			<div class="container">
+				<div class="education-horizontal-timeline">
+					<div class="row">
+					{% for detail in self.details %}
+						<div class="col-sm-4">
+							<div class="single-horizontal-timeline">
+								<div class="experience-time">
+									<h2>{{ detail.year_start }} - {{ detail.year_end }}</h2>
+									<h3>{{ detail.course }}</h3>
+								</div><!--/.experience-time-->
+								<div class="timeline-horizontal-border">
+									<i class="fa fa-circle" aria-hidden="true"></i>
+									<span class="single-timeline-horizontal"></span>
+								</div>
+								<div class="timeline">
+									<div class="timeline-content">
+										<h4 class="title">
+											{{ detail.name_of_varsity }}
+										</h4>
+										<h5>{{ detail.varsity_state_and_country }}</h5>
+										{{ detail.text }}
+									</div><!--/.timeline-content-->
+								</div><!--/.timeline-->
+							</div>
+						</div>
+					{% endfor %}
+					</div>
+				</div>
+			</div>
+
+		</section><!--/.education-->
+		<!--education end -->

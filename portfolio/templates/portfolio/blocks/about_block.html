@@ -1,0 +1,69 @@
+{% load wagtailimages_tags %}
+
+<!--about start -->
+		<section id="about" class="about">
+			<div class="section-heading text-center">
+				<h2>{{ self.title }}</h2>
+			</div>
+			<div class="container">
+				<div class="about-content">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="single-about-txt">
+							{{ self.text }}
+								<div class="row">
+									{% if self.phone_no %}
+									<div class="col-sm-4">
+										<div class="single-about-add-info">
+											<h3>phone</h3>
+											<p>{{ self.phone_no }}</p>
+										</div>
+									</div>
+									{% endif %}
+									{% if self.email %}
+									<div class="col-sm-4">
+										<div class="single-about-add-info">
+											<h3>email</h3>
+											<p>{{ self.email }}</p>
+										</div>
+									</div>
+									{% endif %}
+									{% if self.website %}
+									<div class="col-sm-4">
+										<div class="single-about-add-info">
+											<h3>website</h3>
+											<p>{{ self.website }}</p>
+										</div>
+									</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-offset-1 col-sm-5">
+							<div class="single-about-img">
+							{% image self.image original as photo %}
+								<img src="{{ photo.url }}" alt="{{ photo.alt }}">
+								<div class="about-list-icon">
+								{% for detail in self.social_media %}
+									<ul>
+									{% if detail.link %}
+										<li>
+											<a href="{{ detail.link }}">
+												{% if detail.fontawesome_icon_tag %}
+													<i  class="{{ detail.fontawesome_icon_tag }}" aria-hidden="true"></i>
+												{% else %}
+													<i  class="fa fa-{{ detail.name }}" aria-hidden="true"></i>
+												{% endif %}
+											</a>
+										</li><!-- / li -->
+									{% endif %}		
+									</ul><!-- / ul -->
+								{% endfor %}
+								</div><!-- /.about-list-icon -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!--/.about-->
+		<!--about end -->

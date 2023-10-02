@@ -1,0 +1,21 @@
+{% load wagtailimages_tags %}
+<!--welcome-hero start -->
+
+		<section>
+		{% image self.image original as photo %}
+    <div class="hero" style="background: linear-gradient(rgba(53, 53, 53, .7), rgba(53, 53, 53, .7)), url({{ photo.url }}) no-repeat; background-size: cover; background-position: center; height:890px; position:relative; justify-content: center; align-items: center; display: flex;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="header-text">
+						{{ self.text }}
+							
+							{% if self.button_page %}<a href="{{ self.button_page }}" download>{{ self.button_text }}</a>{% endif %}
+							{% if self.url %}<a href="{{ self.url }}" download>{{ self.button_text }}</a>{% endif %}
+						</div><!--/.header-text-->
+					</div><!--/.col-->
+				</div><!-- /.row-->
+			</div><!-- /.container-->
+</div>
+		</section><!--/.welcome-hero-->
+		<!--welcome-hero end -->

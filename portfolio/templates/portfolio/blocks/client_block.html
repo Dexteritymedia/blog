@@ -1,0 +1,23 @@
+{% load wagtailimages_tags %}
+
+<!--clients start -->
+		<section id="{{ self.title }}" class="clients">
+			<div class="section-heading text-center">
+				<h2>{{ self.title }}</h2>
+			</div>
+			<div class="clients-area">
+				<div class="container">
+					<div class="owl-carousel owl-theme" id="client">
+					{% for detail in self.client %}
+						<div class="item">
+							{% if detail.link %}<a href="{{ detail.link }}"></a>{% endif %}
+							{% image detail.image fill-100x100 as photo %}
+								<img src="{{ photo.url }}" class="img-fluid" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" />
+						</div><!--/.item-->
+					{% endfor %}
+						
+					</div><!--/.owl-carousel-->
+				</div><!--/.container-->
+			</div><!--/.clients-area-->
+
+		</section><!--/.clients-->
