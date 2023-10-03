@@ -8,31 +8,32 @@
 			<div class="container">
 				<div class="about-content">
 					<div class="row">
+					{% for detail in self.details %}
 						<div class="col-sm-6">
 							<div class="single-about-txt">
-							{{ self.text }}
+							{{ detail.text }}
 								<div class="row">
-									{% if self.phone_no %}
+									{% if detail.phone_no %}
 									<div class="col-sm-4">
 										<div class="single-about-add-info">
 											<h3>phone</h3>
-											<p>{{ self.phone_no }}</p>
+											<p>{{ detail.phone_no }}</p>
 										</div>
 									</div>
 									{% endif %}
-									{% if self.email %}
+									{% if detail.email %}
 									<div class="col-sm-4">
 										<div class="single-about-add-info">
 											<h3>email</h3>
-											<p>{{ self.email }}</p>
+											<p>{{ detail.email }}</p>
 										</div>
 									</div>
 									{% endif %}
-									{% if self.website %}
+									{% if detail.website %}
 									<div class="col-sm-4">
 										<div class="single-about-add-info">
 											<h3>website</h3>
-											<p>{{ self.website }}</p>
+											<p>{{ detail.website }}</p>
 										</div>
 									</div>
 									{% endif %}
@@ -41,27 +42,50 @@
 						</div>
 						<div class="col-sm-offset-1 col-sm-5">
 							<div class="single-about-img">
-							{% image self.image original as photo %}
+							{% image detail.image original as photo %}
 								<img src="{{ photo.url }}" alt="{{ photo.alt }}">
 								<div class="about-list-icon">
-								{% for detail in self.social_media %}
 									<ul>
-									{% if detail.link %}
+									{% if detail.facebook %}
 										<li>
-											<a href="{{ detail.link }}">
-												{% if detail.fontawesome_icon_tag %}
-													<i  class="{{ detail.fontawesome_icon_tag }}" aria-hidden="true"></i>
-												{% else %}
-													<i  class="fa fa-{{ detail.name }}" aria-hidden="true"></i>
-												{% endif %}
+											<a href="#">
+												<i  class="fa fa-facebook" aria-hidden="true"></i>
 											</a>
 										</li><!-- / li -->
-									{% endif %}		
+									{% endif %}
+									{% if detail.dribbble %}
+										<li>
+											<a href="#">
+												<i  class="fa fa-dribbble" aria-hidden="true"></i>
+											</a>
+											
+										</li><!-- / li -->
+										{% endif %}
+										<li>
+											<a href="#">
+												<i  class="fa fa-twitter" aria-hidden="true"></i>
+											</a>
+											
+										</li><!-- / li -->
+										<li>
+											<a href="#">
+												<i  class="fa fa-linkedin" aria-hidden="true"></i>
+											</a>
+										</li><!-- / li -->
+										<li>
+											<a href="#">
+												<i  class="fa fa-instagram" aria-hidden="true"></i>
+											</a>
+										</li><!-- / li -->
+										
+										
 									</ul><!-- / ul -->
-								{% endfor %}
 								</div><!-- /.about-list-icon -->
+
 							</div>
+
 						</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>

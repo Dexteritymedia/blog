@@ -31,6 +31,26 @@ class BlogPage(Page):
         'blog.BlogTagIndexPage',
         ]
 
+    def get_context(self, request, *args, **kwargs):
+        context = super(BlogPage, self).get_context(request, *args, **kwargs)
+        all_posts = BlogPostPage.objects.live().public().order_by('-first_published_at')
+        print(all_posts)
+        
+
+        paginator = Paginator(all_posts, 4)
+
+        page = request.GET.get('page')
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        context['posts'] = posts
+        return context
+
+
     class Meta:
         verbose_name = "Copywriting Blog"
         verbose_name_plural = "Copywriting Blog"

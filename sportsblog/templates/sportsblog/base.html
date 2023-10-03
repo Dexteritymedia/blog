@@ -107,6 +107,7 @@
     <!-- Footer Start -->
     <div class="container-fluid bg-dark pt-5 px-sm-3 px-md-5 mt-5">
         <div class="row py-4">
+		{% if settings.site_settings.SocialMediaSettings.twitter  %}
             <div class="col-lg-3 col-md-6 mb-5">
                 <h5 class="mb-4 text-white text-uppercase font-weight-bold">Follow Us</h5>
                 <div class="d-flex justify-content-start">
@@ -118,6 +119,7 @@
 					{% if settings.site_settings.SocialMediaSettings.pinterest  %}<a class="btn btn-lg btn-secondary btn-lg-square" href="https://www.linkedin.com/{{ settings.site_settings.SocialMediaSettings.linkedin }}""><i class="fab fa-pinterest"></i></a>{% endif %}
                 </div>
             </div>
+			{% endif %}
 			
 			{% get_top_five_blogs %}
 			
