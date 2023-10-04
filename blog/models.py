@@ -25,6 +25,7 @@ from home.blocks import BodyBlock
 # Create your models here.
 
 class BlogPage(Page):
+    page_description = "Use this page to create a copywrting blog website"
     template = "blog/home.html"
     subpage_types = [
         'blog.BlogPostPage',

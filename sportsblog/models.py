@@ -30,6 +30,7 @@ from core.blocks import PageSectionStoryBlock, StoryBlock
 
 
 class BlogIndexPage(Page):
+    page_description = "Use this page to create a sports blog"
     max_count = 1
     template = 'sportsblog/blog.html'
     subpage_types = [
@@ -47,6 +48,7 @@ class BlogIndexPage(Page):
         featured_posts = BlogDetailPage.objects.live().public().order_by('-first_published_at')[6:12]
         all_posts = BlogDetailPage.objects.live().public().order_by('-first_published_at')[12:]
         print(top_three_posts)
+        categories = BlogListingPage.objects.live().public()[:5]#first five categories
 
 
         if request.GET.get('tag', None):
@@ -68,6 +70,7 @@ class BlogIndexPage(Page):
         context['top_three_posts'] = top_three_posts
         context['top_four_posts'] = top_four_posts
         context['featured_posts'] = featured_posts
+        context['categories'] = categories
         return context
 
 

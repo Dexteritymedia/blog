@@ -54,7 +54,7 @@ class AboutBlock(StructBlock):
         StructBlock(
             [
                 ('name', CharBlock(required=False, help_text='Add name of the social media')),
-                ('link', URLBlock(required=False, help_text='If the button page above is selected, that will be used first')),
+                ('link', URLBlock(required=False, help_text='Add the link to your social media page')),
                 ('fontawesome_icon_tag', CharBlock(default="fa fa-facebook", help_text="For example to add facebook logo just add this 'fa fa-facebook' ", required=False)),
             ]
         )
@@ -75,11 +75,12 @@ class EducationBlock(StructBlock):
     details = ListBlock(
         StructBlock(
             [
-                ('year_start', CharBlock(required=False, help_text="Add your title")),
-                ('year_end', CharBlock(required=False, help_text="Add your title")),
-                ('course', CharBlock(required=False, help_text="Add your title")),
-                ('name_of_varsity', CharBlock(required=False, help_text="Add your title")),
-                ('varsity_state_and_country', CharBlock(required=False, help_text="Add your title")),
+                ('year_start', DateBlock(required=False, help_text="Add the year you got admitted")),
+                ('year_end', CharBlock(required=False, help_text="Add the year you left. if you are currently studying enter PRESENT")),
+                ('course', CharBlock(required=False, help_text="Add the course of study")),
+                ('certification', CharBlock(required=False, help_text="Enter your certification e.g BSC, MBA, OND, HND, SSCE")),
+                ('name_of_varsity_school', CharBlock(required=False, help_text="Add the name of varsity or school you attended")),
+                ('varsity_state_and_country', CharBlock(required=False, help_text="Enter the location of the varsity and school")),
                 ('text', RichTextBlock(required=False,)),
             ]
         )
@@ -96,8 +97,8 @@ class SkillBlock(StructBlock):
     details = ListBlock(
         StructBlock(
             [
-                ('skill', CharBlock(required=True, help_text="Add your title")),
-                ('number', IntegerBlock(required=False, help_text="Add your title")),
+                ('skill', CharBlock(required=True, help_text="Enter the skill you have experience in")),
+                ('number', IntegerBlock(required=False, help_text="Gauge the level of your skill between 1-100")),
             ]
         )
     )
@@ -118,9 +119,9 @@ class ExperienceBlock(StructBlock):
                     ('right', 'Right'),
                 ], blank=True, required=False)
                 ),
-                ('year_start', DateBlock(required=True, help_text="Add your title")),
-                ('year_end', CharBlock(required=True, help_text="Add your title")),
-                ('position', CharBlock(required=True, help_text="Add your title")),
+                ('year_start', DateBlock(required=True, help_text="Add the year you started working")),
+                ('year_end', CharBlock(required=True, help_text="Add the year you left. if you are currently working enter PRESENT")),
+                ('position', CharBlock(required=True, help_text="Add the position you held in your place of work")),
                 ('name_of_organization', CharBlock(required=True, help_text="Enter the organization or company name you previously worked for")),
                 ('location', CharBlock(required=True, help_text="Enter where the organization or company is located")),
                 ('text', RichTextBlock()),

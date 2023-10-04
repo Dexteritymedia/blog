@@ -23,4 +23,5 @@ from modelcluster.tags import ClusterTaggableManager
 # Create your models here.
 
 class MainPage(Page):
+    page_description = "Use this page to create a Tech blog website"
     pass

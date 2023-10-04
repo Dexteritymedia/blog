@@ -33,6 +33,7 @@ from .blocks import (
 # Create your models here.
 
 class PortfolioHomePage(Page):
+    page_description = "Use this page to create a portfolio website"
     template = "portfolio/home.html"
     subpage_types = [
         'portfolio.PortfolioPage',
