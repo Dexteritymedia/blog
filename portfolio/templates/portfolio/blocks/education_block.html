@@ -10,8 +10,9 @@
 						<div class="col-sm-4">
 							<div class="single-horizontal-timeline">
 								<div class="experience-time">
-									<h2>{{ detail.year_start }} - {{ detail.year_end }}</h2>
+									{% if detail.year_start %}<h2>{{ detail.year_start }} - {{ detail.year_end }}</h2>{% endif %}
 									<h3>{{ detail.course }}</h3>
+									{% if detail.certification %}<b>{{ detail.certification }}</b>{% endif %}
 								</div><!--/.experience-time-->
 								<div class="timeline-horizontal-border">
 									<i class="fa fa-circle" aria-hidden="true"></i>

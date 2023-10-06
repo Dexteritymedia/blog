@@ -36,6 +36,7 @@ class BlogIndexPage(Page):
     subpage_types = [
         'sportsblog.BlogDetailPage',
         'sportsblog.BlogListingPage',
+        'sportsblog.BlogTagPage',
         #'sportsblog.Service',
         ]
     show_in_menus_default = True
@@ -80,6 +81,7 @@ class BlogIndexPage(Page):
 
 
 class BlogListingPage(Page):
+    page_description = "Use this page to add categories to the blog"
     template = "sportsblog/blog_listing_page.html"
 
     subpage_types = ['sportsblog.BlogDetailPage']
@@ -144,8 +146,8 @@ class BlogListingPage(Page):
 
 
 class BlogDetailPage(Page):
+    page_description = "Use this page to create a blog post"
     template = 'sportsblog/blog_detail.html'
-    #template = "patterns/pages/blog/blog_detail.html"
     subpage_types = [
         'sportsblog.BlogDetailPage',
     ]
@@ -220,6 +222,51 @@ class BlogDetailPage(Page):
         context['entries'] = entries
         return context
 
+
+class BlogTagPage(Page):
+    page_description = "Use this page to create a homepage for tags"
+    template = "sportsblog/blog_tag.html"
+    max_count = 1
+    parent_page_types = [
+        'sportsblog.BlogIndexPage'
+        ]
+    subpage_types = [
+        'sportsblog.BlogTagPage'
+        ]
+
+    description = models.TextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('description'),
+    ]
+
+    def get_context(self, request):
+
+        # Filter by tag
+        tag = request.GET.get('tag')
+        print(tag)
+        blogpages = BlogDetailPage.objects.filter(tags__name=tag)
+        print(blogpages)
+        # Update template context
+        context = super().get_context(request)
+        paginator = Paginator(blogpages, 2)
+
+        page = request.GET.get('page')
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        context['posts'] = posts
+        context['blogpages'] = blogpages
+        return context
+
+    class Meta:
+        verbose_name = "Blog Tag"
+
+        
 @register_snippet
 class SportsTag(TaggitTag):
     class Meta:
