@@ -46,8 +46,10 @@ class BlogIndexPage(Page):
         context = super().get_context(request)
         top_three_posts = BlogDetailPage.objects.live().public().order_by('-first_published_at')[0:2]#First four
         top_four_posts = BlogDetailPage.objects.live().public().order_by('-first_published_at')[2:4]
-        featured_posts = BlogDetailPage.objects.live().public().order_by('-first_published_at')[6:12]
-        all_posts = BlogDetailPage.objects.live().public().order_by('-first_published_at')[12:]
+        #featured_posts = BlogDetailPage.objects.live().public().order_by('-first_published_at')[6:12]
+        topics = BlogListingPage.objects.live().public().order_by('-first_published_at')
+        #all_posts = BlogDetailPage.objects.live().public().order_by('-first_published_at')[12:]
+        all_posts = BlogDetailPage.objects.live().public().order_by('-first_published_at')
         print(top_three_posts)
         categories = BlogListingPage.objects.live().public()[:5]#first five categories
 
@@ -57,7 +59,7 @@ class BlogIndexPage(Page):
             all_posts = all_posts.filter(tags__slug__in=[tags])
         
 
-        paginator = Paginator(all_posts, 20)
+        paginator = Paginator(all_posts, 18)
 
         page = request.GET.get('page')
         try:
@@ -70,7 +72,8 @@ class BlogIndexPage(Page):
         context['posts'] = posts
         context['top_three_posts'] = top_three_posts
         context['top_four_posts'] = top_four_posts
-        context['featured_posts'] = featured_posts
+        #context['featured_posts'] = featured_posts
+        context['topics'] = topics
         context['categories'] = categories
         return context
 
@@ -90,6 +93,14 @@ class BlogListingPage(Page):
         ]
     show_in_menus_default = True
 
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        blank=True,
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
+        )
+
 
     heading = StreamField(
         [
@@ -105,6 +116,7 @@ class BlogListingPage(Page):
     
 
     content_panels = Page.content_panels + [
+        FieldPanel('image'),
         MultiFieldPanel([
             FieldPanel('heading'),
             ], heading='Additional Information'),
@@ -218,7 +230,13 @@ class BlogDetailPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        entries = BlogDetailPage.objects.live().public().exclude(id=self.id).order_by('-first_published_at')[:5]
+        entries = BlogDetailPage.objects.live().public().exclude(id=self.id).order_by('-first_published_at')[:8]
+        previous_post = BlogDetailPage.objects.live().public().filter(id__gt=self.id).order_by('id').only('id').first().id
+        #next_post = BlogDetailPage.objects.live().public().filter(id__lt=self.id).order_by('id').only('id').first().id
+        print(previous_post)
+        #print(next_post)
+        context['previous_post'] = previous_post
+        #context['next_post'] = next_post
         context['entries'] = entries
         return context
 

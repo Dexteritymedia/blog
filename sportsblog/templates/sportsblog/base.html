@@ -38,6 +38,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'sportsblog/css/style.css' %}" rel="stylesheet">
+    <link rel="manifest" href="{% static 'sportsblog/js/manifest.json' %}">
 	
 	{% if settings.site_settings.SiteSettings.links %}
 	{{ settings.site_settings.SiteSettings.links|safe }}
@@ -147,6 +148,26 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'sportsblog/js/main.js' %}"></script>
+	<script>
+    window.addEventListener('load', () => {
+      registerSW();
+    });
+
+    // Register the Service Worker
+    async function registerSW() {
+      if ('serviceWorker' in navigator) {
+        try {
+          await navigator
+                .serviceWorker
+                .register('serviceworker.js');
+        }
+        catch (e) {
+          console.log('SW registration failed');
+        }
+      }
+    }
+ </script>
+ <script src="{% static 'sportsblog/js/serviceworker.js' %}"></script>
 </body>
 
 </html>
